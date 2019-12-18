@@ -1,0 +1,46 @@
+﻿@model List<VollopRooster.ViewModels.EmployeeViewModel>
+@{
+    ViewData["Title"] = "EmployeeHome";
+}
+
+<div class="text-center">
+    <h1 class="display-4">All employees</h1>
+    <br/>
+    <div class="d-flex justify-content-center">
+    @try
+    {
+        @foreach (var employee in Model)
+         {
+             <div class="media">
+                 <img src="..." class="mr-3" alt=" ">
+                 <div class="media-body">
+                     @Html.ActionLink(@employee.Name, "Employeeindividual", "Employee", new {id = @employee.Id}, new {@class = "nav-item nav-link"})
+                     <br/>
+                     <ul class="list-unstyled">
+                         <li>Maximum aantal uren: @employee.MaxHours</li>
+                         <li>Telefoonnummer: @employee.Phonenumber</li>
+                         <li>Beschikbaarheid: @employee.Availability</li>
+                     </ul>
+                     <h2>Rollen</h2>
+                     <ul>
+                         <li>Bar: @employee.Bar</li>
+                         <li>Event: @employee.Event</li>
+                         <li>Overig: @employee.Iets</li>
+
+                     </ul>
+                     @Html.ActionLink("edit", "ChangeEmployee", "Employee", new {id = @employee.Id}, new {@class = "nav-item nav-link"})
+                     @Html.ActionLink("Remove", "Remove", "Employee", new {id = @employee.Id}, new {@class = "nav-item nav-link"})
+                 </div>
+             </div>
+         }
+    }
+    catch (NullReferenceException e)
+    {
+        <p>Nullreference</p>
+    }
+    </div>
+    <br/>
+    <input type="button" class="btn btn-info" value="Add" onclick="location.href='@Url.Action("Add", "Employee")'" />
+</div>
+
+

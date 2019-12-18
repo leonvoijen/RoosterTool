@@ -1,0 +1,44 @@
+﻿@model List<VollopRooster.ViewModels.EventViewModel>
+@{
+    ViewData["Title"] = "EventHome";
+}
+
+<div class="text-center">
+    <h1 class="display-4">All Events</h1>
+    <br />
+    <div class="d-flex justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="media">
+                <img src="..." class="mr-3" alt=" ">
+                <div class="media-body">
+                    @Html.ActionLink(@item.Name, "EventIndividual", "Event", new { id = @item.Id }, new { @class = "nav-item nav-link" })
+                    <br/>
+                    <h1>@item.Name</h1>
+                    <b>Description</b>
+                    <ul>
+                        @if (@item.Description != " ")
+                        {
+                            <li>@item.Description</li>
+                        }
+                        else
+                        {
+                            <li>Geen beschrijving</li>
+                        }
+                    </ul>
+                    <h2>Time</h2>
+                    <ul>
+                        <li>Maand: @item.Month</li>
+                        <li>Starttijd: @item.StartTime</li>
+                        <li>Eindtijd: @item.EndTime</li>
+                    </ul>
+                    @Html.ActionLink("Edit","ChangeEvent","Event")
+                    @Html.ActionLink("Remove","RemoveEvent","Event")
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <input type="button" class="btn btn-info" value="Add" onclick="location.href='@Url.Action("Add", "Event")'" />
+</div>
+

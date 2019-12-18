@@ -1,0 +1,42 @@
+﻿@model VollopRooster.ViewModels.EmployeeViewModel
+@{
+    ViewData["Title"] = "ChangeEmployee";
+}
+
+<div class="text-center">
+    <form asp-controller="Employee" asp-action="UpdateEmployee" method="post">
+        <input type="hidden" asp-for="Id" name="id" value="@Model.Id">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Name</label>
+            <input asp-for="Name" type="Text" class="form-control" id="Text" placeholder="@Model.Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Maximum hours</label>
+            <input asp-for="MaxHours" type="Text" class="form-control" id="Text" placeholder="@Model.MaxHours">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Availability</label>
+            @Html.ActionLink("change availability", "AddAvailability", "Employee", new { id = @Model.Id }, new { @class = "nav-item nav-link" })
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Phone Number</label>
+            <input asp-for="Phonenumber" type="Text" class="form-control" id="Text" placeholder="@Model.Phonenumber">
+        </div>
+        <h5>Roles</h5>
+
+        <div class="checkbox">
+            <label><input asp-for="Bar" type="checkbox" value="@Model.Bar">Bar</label>
+        </div>
+
+        <div class="checkbox">
+            <label><input asp-for="Event" type="checkbox" value="@Model.Event">Event</label>
+        </div>
+
+        <div class="checkbox">
+            <label><input asp-for="Iets" type="checkbox" value="@Model.Iets">Iets</label>
+        </div>
+        <button class="btn btn-primary" id="button">Save</button>
+    </form>
+
+</div>
+

@@ -1,0 +1,18 @@
+﻿@model List<VollopRooster.ViewModels.ShiftViewModel>
+@{
+    ViewData["Title"] = "EventHome";
+}
+
+<div class="text-center">
+    <h1 class="display-4">All Shifts</h1>
+    <br />
+        @foreach(var shift in Model)
+    {
+        @Html.ActionLink(@shift.Date.ToString(), "ShiftIndividual", "Shift", new { id = @shift.Id }, new { @class = "nav-item nav-link" })
+        @Html.ActionLink("Edit","ChangeShift","Shift")
+        @Html.ActionLink("Remove", "RemoveShift", "Shift", new {id = @shift.Id}, new {@class = "nav-item nav-link"})
+        <input type="button" class="btn btn-info" value="Add" onclick="location.href='@Url.Action("Add", "Shift")'" />
+        <br/>
+    }
+</div>
+

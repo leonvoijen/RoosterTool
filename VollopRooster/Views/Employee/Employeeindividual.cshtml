@@ -1,0 +1,21 @@
+﻿@model VollopRooster.ViewModels.EmployeeViewModel
+@{
+    ViewData["Title"] = "Employeeindividual";
+}
+
+<div class="text-center">
+
+    <h1>@Model.Name</h1>
+    <h5>Maximum hours: @Model.MaxHours </h5>
+    <h5>Availability</h5>
+    <p>@Model.Availability</p>
+    <h5>Phone Number</h5>
+    <p>@Model.Phonenumber</p>
+    <h5>competentie</h5>
+    <ul>
+        <li>Bar @Model.Bar </li>
+        <li>Event @Model.Event</li>
+        <li>Overig @Model.Iets</li>
+    </ul>
+</div>
+

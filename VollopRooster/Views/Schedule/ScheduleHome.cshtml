@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "ScheduleHome";
+}
+
+<div class="text-center">
+    <h1>Create Schedule</h1>
+    <h5>Start date</h5>
+    <h5>End date</h5>
+
+    <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("ChangeSchedule", "Schedule")'" />
+    <input type="button" class="btn btn-info" value="Remove" onclick="location.href='@Url.Action("Remove", "Schedule")'" />
+</div>

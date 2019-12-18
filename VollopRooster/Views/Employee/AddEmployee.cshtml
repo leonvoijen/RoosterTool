@@ -1,0 +1,42 @@
+﻿@model EmployeeModel
+@{
+    ViewData["Title"] = "AddEmployee";
+}
+
+<h1>AddEmployee</h1>
+
+<div class="text-center">
+
+    <form asp-controller="Employee" asp-action="CreateEmployee" method="post">
+    <div class="form-group">
+    <input asp-for="Name"type="Text" class="form-control" id="Name" name="Name" placeholder="Name">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Maximum hours</label>
+        <input asp-for="MaxHours" type="Number" class="form-control" id="MaxHours" name="MaxHours" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Availability</label>
+        <input asp-for="Availability" type="Text" class="form-control" id="Availability" name="Availability" placeholder="Availability">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Phone Number</label>
+        <input asp-for="Phone" type="Text" class="form-control" id="Phone" name="Phone" placeholder="PhoneNumber">
+    </div>
+    <h5>Roles</h5>
+
+    <div class="checkbox">
+        <label><input asp-for="Bar" type="checkbox" id="Bar" value="">Bar</label>
+    </div>
+    <div class="checkbox">
+        <label><input asp-for="Event" type="checkbox" id="Event" value="">Event</label>
+    </div>
+    <div class="checkbox">
+        <label><input asp-for="Iets" type="checkbox" id="Iets" value="">Iets</label>
+    </div>
+        <button class="btn btn-primary" id="button">Save</button>
+    </form>
+</div>
+
+
+

@@ -1,0 +1,33 @@
+﻿@model VollopRooster.ViewModels.ShiftViewModel
+@{
+    ViewData["Title"] = "ChangeShift";
+}
+
+<div class="text-center">
+    <form asp-controller="Shift" asp-action="UpdateShift" method="post">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Description</label>
+            <input type="Text" class="form-control" id="Name" asp-for="Description" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Date</label>
+            <input type="Text" class="form-control" id="Month" asp-for="Date" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Starttijd</label>
+            <input type="Text" class="form-control" id="Description" asp-for="StartTime" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Eindtijd</label>
+            <input type="Text" class="form-control" id="Date" asp-for="EndTime" placeholder="">
+        </div>
+
+        <h5>Required Staff</h5>
+        <input type="number" value="0" min="0" max="10" step="1" asp-for="NrOfBar"/>
+        <input type="number" value="0" min="0" max="10" step="1" asp-for="NrOfEvent"/>
+        <input type="number" value="0" min="0" max="10" step="1" asp-for="NrOfExtra"/>
+
+        <button class="btn btn-primary" id="button">Save</button>
+    </form>
+</div>
+
