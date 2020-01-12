@@ -8,9 +8,10 @@
 <div class="text-center">
 
     <form asp-controller="Employee" asp-action="CreateEmployee" method="post">
-    <div class="form-group">
-    <input asp-for="Name"type="Text" class="form-control" id="Name" name="Name" placeholder="Name">
-    </div>
+        <div class="form-group">
+            <input type="hidden" asp-for="PicUrl" name="PicUrl" value="text">
+            <input asp-for="Name" type="Text" class="form-control" id="Name" name="Name" placeholder="Name">
+        </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Maximum hours</label>
         <input asp-for="MaxHours" type="Number" class="form-control" id="MaxHours" name="MaxHours" placeholder="">
@@ -26,13 +27,13 @@
     <h5>Roles</h5>
 
     <div class="checkbox">
-        <label><input asp-for="Bar" type="checkbox" id="Bar" value="">Bar</label>
+        <label><input asp-for="Bar" type="checkbox" Name="Bar">Bar</label>
     </div>
     <div class="checkbox">
-        <label><input asp-for="Event" type="checkbox" id="Event" value="">Event</label>
+        <label><input asp-for="Event" type="checkbox" Name="Event">Event</label>
     </div>
     <div class="checkbox">
-        <label><input asp-for="Iets" type="checkbox" id="Iets" value="">Iets</label>
+        <label><input asp-for="Iets" type="checkbox" Name="Overig" >Iets</label>
     </div>
         <button class="btn btn-primary" id="button">Save</button>
     </form>

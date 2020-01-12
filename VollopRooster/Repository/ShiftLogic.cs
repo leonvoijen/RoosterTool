@@ -11,7 +11,7 @@ using VollopRooster.Models;
 
 namespace Logic
 {
-    class ShiftLogic : IShiftLogic
+    public class ShiftLogic : IShiftLogic
     {
         private readonly IShiftContext Context;
         public ShiftLogic(IShiftContext Context)
@@ -41,6 +41,11 @@ namespace Logic
             {
                 yield return new ShiftModel(dto);
             }
+        }
+
+        public IEnumerable<ShiftDTO> GetAllShiftDtos(DateTime startdate, DateTime enddate)
+        { 
+            return Context.GetAllShiftsFromPeriod(startdate,enddate);
         }
 
         public ShiftModel GetShift(int id)

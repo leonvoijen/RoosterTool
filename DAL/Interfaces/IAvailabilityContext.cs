@@ -10,5 +10,6 @@ namespace DAL.Interfaces
         AvailabilityDTO GetAvailability(int id);
         void UpdateAvailability(AvailabilityDTO dtotransfer);
         List<DateTime> GetLeave();
+        List<AvailabilityDTO> GetAllAvailability();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL.Context;
 using DAL.Interfaces;
 using DAL.Memory;
 using Logic;
@@ -40,14 +41,23 @@ namespace VollopRooster
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<IEmployeeContext, EmployeeMemory>();
+            //memory services
+            //services.AddSingleton<IEmployeeContext, EmployeeMemory>();
+            //services.AddSingleton<IEventContext, EventMemory>();
+            //services.AddSingleton<IShiftContext, ShiftMemory>();
+            //services.AddSingleton<IAvailabilityContext, AvailabilityMemory>();
+            //services.AddSingleton<IScheduleContext, ScheduleMemory>();
+
             services.AddSingleton<IEmployeeLogic, EmployeeLogic>();
             services.AddSingleton<IEventLogic, EventLogic>();
-            services.AddSingleton<IEventContext, EventMemory>();
-            services.AddSingleton<IShiftContext, ShiftMemory>();
             services.AddSingleton<IShiftLogic, ShiftLogic>();
-            services.AddSingleton<IAvailabilityContext, AvailabilityMemory>();
             services.AddSingleton<IAvailabilityLogic, AvailabilityLogic>();
+            services.AddSingleton<IScheduleLogic, ScheduleLogic>();
+
+            services.AddSingleton<IEmployeeContext, EmployeeContext>();
+            services.AddSingleton<IShiftContext, ShiftContext>();
+            services.AddSingleton<IAvailabilityContext, AvailabilityContext>();
+            services.AddSingleton<IScheduleContext, ScheduleContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

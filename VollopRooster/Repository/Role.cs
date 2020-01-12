@@ -7,8 +7,8 @@ namespace VollopRooster.Repository
 {
     public enum Role
     {
-        Bar = 0,
-        Event = 1,
-        Other = 2
+        Bar,
+        Event,
+        Other
     }
 }

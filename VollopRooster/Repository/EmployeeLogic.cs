@@ -8,7 +8,7 @@ using DAL.DTO;
 
 namespace Logic
 {
-    class EmployeeLogic : IEmployeeLogic
+    public class EmployeeLogic : IEmployeeLogic
     {
         private readonly IEmployeeContext EmployeeContext;
 
@@ -36,6 +36,11 @@ namespace Logic
                 PicUrl = model.PicUrl
             };
             EmployeeContext.ChangeEmployee(dto);
+        }
+
+        public IEnumerable<EmployeeDTO>GetAllEmployeeDtos()
+        {
+            return EmployeeContext.GetAllEmployees();
         }
 
         public EmployeeModel GetEmployee(int id)

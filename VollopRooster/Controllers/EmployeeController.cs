@@ -106,9 +106,9 @@ namespace VollopRooster.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateEmployee(string Name, string Phone, int MaxHours, string Availability, bool Bar, bool Event, bool Overig)
+        public IActionResult CreateEmployee(string Name, string Phone, int MaxHours, string Availability, bool Bar, bool Event, bool Overig, string PicUrl)
         {
-            EmployeeModel newEmployee = new EmployeeModel(Name, Phone, Bar, Event, Overig, MaxHours, Availability);
+            EmployeeModel newEmployee = new EmployeeModel(Name,PicUrl,Phone,MaxHours," ",Bar,Event,Overig);
             EmployeeLogic.AddEmployee(newEmployee);
             return RedirectToAction("EmployeeHome");
         }
@@ -119,9 +119,9 @@ namespace VollopRooster.Controllers
             return View("AddAvailability", model);
         }
 
-        public IActionResult UpdateAvailability(int id, DateTime startmonday, DateTime endmonday, DateTime starttuesday, DateTime endtuesday, DateTime startwednesday, DateTime endwednesday,
-            DateTime startthursday, DateTime endthursday, DateTime startfriday, DateTime endfriday, DateTime startsaturday, DateTime endsaturday, DateTime startsunday,
-            DateTime endsunday)
+        public IActionResult UpdateAvailability(int id, TimeSpan startmonday, TimeSpan endmonday, TimeSpan starttuesday, TimeSpan endtuesday, TimeSpan startwednesday, TimeSpan endwednesday,
+            TimeSpan startthursday, TimeSpan endthursday, TimeSpan startfriday, TimeSpan endfriday, TimeSpan startsaturday, TimeSpan endsaturday, TimeSpan startsunday,
+            TimeSpan endsunday)
         {
             var availabilitymodel = new AvailabilityModel(id,startmonday,endmonday,starttuesday,endtuesday,startwednesday,endwednesday,
                 startthursday,endthursday,startfriday,endfriday,startsaturday,endsaturday,startsunday, endsunday);

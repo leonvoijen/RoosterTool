@@ -44,6 +44,11 @@ namespace VollopRooster.Repository
             return modeltransfer;
         }
 
+        public AvailabilityDTO GetAvailabilityDtos(int id)
+        {
+            return Context.GetAvailability(id);
+        }
+
         public void UpdateAvailability(AvailabilityModel availabilitymodel)
         {
             AvailabilityDTO dtotransfer = new AvailabilityDTO()

@@ -7,11 +7,12 @@ namespace DAL.Interfaces
 {
     public interface IShiftContext
     {
-        IEnumerable<ShiftDTO> GetAllShifts();
+        List<ShiftDTO> GetAllShifts();
         ShiftDTO GetShift(int id);
         void AddShift(ShiftDTO dto);
         void RemoveShift(int id);
         IEnumerable<string> GetRoles(int id);
         void ChangeShift(ShiftDTO dto);
+        IEnumerable<ShiftDTO> GetAllShiftsFromPeriod(DateTime startdate, DateTime enddate);
     }
 }

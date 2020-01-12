@@ -12,17 +12,18 @@ namespace VollopRooster.Models
         {
 
         }
-        public EmployeeModel(string name, string phone, bool bar, bool @event, bool iets, int maxHours, string availability)
+
+        public EmployeeModel(string name, string picUrl, string phone, int maxHours, string availability, bool bar, bool @event, bool iets)
         {
             Name = name;
+            PicUrl = picUrl;
             Phone = phone;
+            MaxHours = maxHours;
+            Availability = availability;
             Bar = bar;
             Event = @event;
             Iets = iets;
-            MaxHours = maxHours;
-            Availability = availability;
         }
-
         public EmployeeModel(string name, string picUrl, string phone, int id, int maxHours, string availability, bool bar, bool @event, bool iets)
         {
             Name = name;

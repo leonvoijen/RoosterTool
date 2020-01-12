@@ -11,7 +11,7 @@ namespace VollopRooster.Models
         public AvailabilityModel()
         {
         }
-        public AvailabilityModel(int id,DateTime startMonday, DateTime endMonday, DateTime startTuesday, DateTime endTuesday, DateTime startWednesday, DateTime endWednesday, DateTime startThursday, DateTime endThursday, DateTime startFriday, DateTime endFriday, DateTime startSaturday, DateTime endSaturday, DateTime startSunday, DateTime endSunday)
+        public AvailabilityModel(int id,TimeSpan startMonday, TimeSpan endMonday, TimeSpan startTuesday, TimeSpan endTuesday, TimeSpan startWednesday, TimeSpan endWednesday, TimeSpan startThursday, TimeSpan endThursday, TimeSpan startFriday, TimeSpan endFriday, TimeSpan startSaturday, TimeSpan endSaturday, TimeSpan startSunday, TimeSpan endSunday)
         {
             Id = id;
             StartMonday = startMonday;
@@ -30,7 +30,7 @@ namespace VollopRooster.Models
             EndSunday = endSunday;
         }
 
-        public AvailabilityModel(DateTime startMonday, DateTime endMonday, DateTime startTuesday, DateTime endTuesday, DateTime startWednesday, DateTime endWednesday, DateTime startThursday, DateTime endThursday, DateTime startFriday, DateTime endFriday, DateTime startSaturday, DateTime endSaturday, DateTime startSunday, DateTime endSunday)
+        public AvailabilityModel(TimeSpan startMonday, TimeSpan endMonday, TimeSpan startTuesday, TimeSpan endTuesday, TimeSpan startWednesday, TimeSpan endWednesday, TimeSpan startThursday, TimeSpan endThursday, TimeSpan startFriday, TimeSpan endFriday, TimeSpan startSaturday, TimeSpan endSaturday, TimeSpan startSunday, TimeSpan endSunday)
         {
             StartMonday = startMonday;
             EndMonday = endMonday;
@@ -49,19 +49,19 @@ namespace VollopRooster.Models
         }
 
         public int Id { get; set;}
-        public DateTime StartMonday { get; set; }
-        public DateTime EndMonday { get; set; }
-        public DateTime StartTuesday { get; set; }
-        public DateTime EndTuesday { get; set; }
-        public DateTime StartWednesday { get; set; }
-        public DateTime EndWednesday { get; set; }
-        public DateTime StartThursday { get; set; }
-        public DateTime EndThursday { get; set; }
-        public DateTime StartFriday { get; set; }
-        public DateTime EndFriday { get; set; }
-        public DateTime StartSaturday { get; set; }
-        public DateTime EndSaturday { get; set; }
-        public DateTime StartSunday { get; set; }
-        public DateTime EndSunday { get; set; }
+        public TimeSpan StartMonday { get; set; }
+        public TimeSpan EndMonday { get; set; }
+        public TimeSpan StartTuesday { get; set; }
+        public TimeSpan EndTuesday { get; set; }
+        public TimeSpan StartWednesday { get; set; }
+        public TimeSpan EndWednesday { get; set; }
+        public TimeSpan StartThursday { get; set; }
+        public TimeSpan EndThursday { get; set; }
+        public TimeSpan StartFriday { get; set; }
+        public TimeSpan EndFriday { get; set; }
+        public TimeSpan StartSaturday { get; set; }
+        public TimeSpan EndSaturday { get; set; }
+        public TimeSpan StartSunday { get; set; }
+        public TimeSpan EndSunday { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace VollopRooster.Controllers
             return View("ShiftHome", shifts);
         }
 
-        public IActionResult CreateShift(int id, DateTime starttime,DateTime endtime, DateTime date, string description, int nrofbar, int nrofevent, int nrofextra)
+        public IActionResult CreateShift(int id, TimeSpan starttime,TimeSpan endtime, DateTime date, string description, int nrofbar, int nrofevent, int nrofextra)
         {
             ShiftModel model = new ShiftModel(id,starttime,endtime,date,description,nrofbar,nrofevent,nrofextra);
             logic.AddShift(model);
@@ -70,6 +70,38 @@ namespace VollopRooster.Controllers
         {
             logic.RemoveShift(id);
             return RedirectToAction("ShiftHome");
+        }
+
+        public IActionResult UpdateShift(int id, string description, DateTime date, TimeSpan starttime, TimeSpan endtime, int nrofbar, int nrofevent, int nrofextra)
+        {
+            ShiftModel model = new ShiftModel
+            {
+                Id = id,
+                Date = date,
+                Description = description,
+                EndTime = endtime,
+                StartTime = starttime,
+                NrOfBar = nrofbar,
+                NrOfEvent = nrofevent,
+                NrOfExtra = nrofextra
+                
+            };
+            logic.UpdateShift(model);
+
+            ShiftModel viewmodeltransfer = logic.GetShift(id);
+
+            var vm = new ShiftViewModel
+            {
+                Id = viewmodeltransfer.Id,
+                Date = viewmodeltransfer.Date,
+                Description = viewmodeltransfer.Description,
+                EndTime = viewmodeltransfer.EndTime,
+                StartTime = viewmodeltransfer.StartTime,
+                NrOfBar = viewmodeltransfer.NrOfBar,
+                NrOfEvent = viewmodeltransfer.NrOfEvent,
+                NrOfExtra = viewmodeltransfer.NrOfExtra
+            };
+            return RedirectToAction("ChangeShift", vm);
         }
     }
 }

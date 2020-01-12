@@ -18,5 +18,6 @@ namespace DAL.Interfaces
         int GetMaxHours(int id);
         int GetTotalEmployees();
         int GetTotalAvailabeHours();
+        void DecreaseHours(int id, int hours);
     }
 }

@@ -1,20 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using VollopRooster.Repository;
+using System.Linq;
+using System.Threading.Tasks;
+using DAL.DTO;
+using DAL.Interfaces;
+using Logic.Interfaces;
 
-namespace Logic
+namespace VollopRooster.Repository
 {
-    public class ScheduleLogic
+    public class ScheduleLogic : IScheduleLogic
     {
-        public ScheduleLogic()
-        {
+        private readonly IScheduleContext _Context;
+        private readonly IEmployeeContext _employeeContext;
+        private readonly IShiftContext _shiftContext;
+        private readonly IAvailabilityContext _availabilityContext;
 
+        public ScheduleLogic(IScheduleContext Context, IEmployeeContext employeeContext, IShiftContext shiftContext, IAvailabilityContext availabilityContext)
+        {
+            _Context = Context;
+            _employeeContext = employeeContext;
+            _shiftContext = shiftContext;
+            _availabilityContext = availabilityContext;
         }
 
-        public void CreateSchedule()
+        public List<EmployeeDTO> GetAllEmployeeData()
         {
-            ScheduleManager manager = new ScheduleManager();
+            return _employeeContext.GetAllEmployees();
+        }
+
+        public List<AvailabilityDTO> GetAllAvailabilityData()
+        {
+            return _availabilityContext.GetAllAvailability();
+        }
+
+        public List<ShiftDTO> GetAllShiftData(DateTime startdate, DateTime enddate)
+        {
+            return _shiftContext.GetAllShiftsFromPeriod(startdate, enddate).ToList();
+        }
+
+        public void CreateSchedule(DateTime startdate, DateTime enddate)
+        {
+           Schedule schedule = new Schedule();
+           ScheduleCreator creator = new ScheduleCreator(GetAllEmployeeData(),GetAllAvailabilityData(),GetAllShiftData(startdate,enddate));
+           schedule = creator.GetSchedule();
+           FileCreator fileCreator = new FileCreator(schedule);
         }
     }
 }

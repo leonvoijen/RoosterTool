@@ -9,7 +9,7 @@ namespace VollopRooster.Models
     public class ShiftModel
     {
 
-        public ShiftModel(int id, DateTime startTime, DateTime endTime, DateTime date, string description, int nrOfBar, int nrOfEvent, int nrOfExtra)
+        public ShiftModel(int id, TimeSpan startTime, TimeSpan endTime, DateTime date, string description, int nrOfBar, int nrOfEvent, int nrOfExtra)
         {
             Id = id;
             StartTime = startTime;
@@ -33,13 +33,17 @@ namespace VollopRooster.Models
             NrOfExtra = dto.NrOfIets;
         }
 
-        public int Id { get; private set; }
-        public DateTime StartTime { get; private set; }
-        public DateTime EndTime { get; private set; }
-        public  DateTime Date { get; private set; }
-        public string Description { get; private set; }
-        public int NrOfBar { get; private set; }
-        public int NrOfEvent { get; private set; }
-        public int NrOfExtra { get; private set; }
+        public ShiftModel()
+        {
+        }
+
+        public int Id { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public  DateTime Date { get; set; }
+        public string Description { get; set; }
+        public int NrOfBar { get; set; }
+        public int NrOfEvent { get; set; }
+        public int NrOfExtra { get; set; }
     }
 }

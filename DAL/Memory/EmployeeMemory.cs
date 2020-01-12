@@ -83,5 +83,13 @@ namespace DAL.Memory
 
             return Roles;
         }
+
+        public void DecreaseHours(int id, int hours)
+        {
+            var employee = Employees.SingleOrDefault(i => i.Id == id);
+            employee.MaxHours -= hours;
+            Employees.RemoveAll(i => i.Id == employee.Id);
+            Employees.Add(employee);
+        }
     }
 }

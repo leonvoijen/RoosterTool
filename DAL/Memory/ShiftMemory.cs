@@ -13,11 +13,11 @@ namespace DAL.Memory
         {
             shifts = new List<ShiftDTO>()
             {
-                new ShiftDTO(0,DateTime.Now, new DateTime(1,1,1,16,0,0),new DateTime(1,1,1,23,0,0),"details",2,2,2),
-                new ShiftDTO(1,DateTime.Now, new DateTime(1,1,1,16,0,0),new DateTime(1,1,1,23,0,0),"details",1,1,1),
-                new ShiftDTO(2,DateTime.Now, new DateTime(1,1,1,16,0,0),new DateTime(1,1,1,23,0,0),"details",1,0,1),
-                new ShiftDTO(3,DateTime.Now, new DateTime(1,1,1,16,0,0),new DateTime(1,1,1,23,0,0),"details",0,0,2),
-                new ShiftDTO(4,DateTime.Now, new DateTime(1,1,1,16,0,0),new DateTime(1,1,1,23,0,0),"details",1,1,2),
+                new ShiftDTO(0,DateTime.Now.AddHours(2), new TimeSpan(16,0,0), new TimeSpan(23,0,0), "details",2,2,2),
+                new ShiftDTO(1,DateTime.Now.AddHours(2), new TimeSpan(16,0,0), new TimeSpan(23,0,0), "details",1,1,1),
+                new ShiftDTO(2,DateTime.Now.AddHours(2), new TimeSpan(16,0,0), new TimeSpan(23,0,0), "details",1,0,1),
+                new ShiftDTO(3,DateTime.Now.AddHours(2), new TimeSpan(16,0,0), new TimeSpan(23,0,0), "details",0,0,0),
+                new ShiftDTO(4,DateTime.Now.AddHours(2), new TimeSpan(16,0,0), new TimeSpan(23,0,0), "details",1,1,2),
             };
         }
 
@@ -32,9 +32,23 @@ namespace DAL.Memory
             shifts.Add(dto);
         }
 
-        public IEnumerable<ShiftDTO> GetAllShifts()
+        public List<ShiftDTO> GetAllShifts()
         {
             return shifts;
+        }
+
+        public IEnumerable<ShiftDTO> GetAllShiftsFromPeriod(DateTime startdate, DateTime enddate)
+        {
+            var dtos = new List<ShiftDTO>();
+            foreach (var shift in shifts)
+            {
+                if (shift.Date >= startdate && shift.Date <= enddate)
+                {
+                    dtos.Add(shift);
+                }
+            }
+
+            return dtos;
         }
 
         public IEnumerable<string> GetRoles(int id)
