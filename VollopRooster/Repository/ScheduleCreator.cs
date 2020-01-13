@@ -11,12 +11,14 @@ namespace VollopRooster.Repository
         private List<AvailabilityDTO> AvailabilityData;
         private List<ShiftDTO> ShiftData;
         private List<EmployeeDTO> TempEmployees;
+        private int TotalHours;
 
-        public ScheduleCreator(List<EmployeeDTO> employeedata, List<AvailabilityDTO> availabilitydata, List<ShiftDTO> shiftdata)
+        public ScheduleCreator(List<EmployeeDTO> employeedata, List<AvailabilityDTO> availabilitydata, List<ShiftDTO> shiftdata, int TotalHours)
         {
             this.EmployeeData = employeedata;
             this.AvailabilityData = availabilitydata;
             this.ShiftData = shiftdata;
+            this.TotalHours = TotalHours;
         }
 
         public Schedule GetSchedule()
@@ -37,6 +39,7 @@ namespace VollopRooster.Repository
 
         private List<EmployeeDTO> FillShiftWithEmployees(ShiftDTO shift)
         {
+            List<EmployeeDTO> allEmployees = EmployeeData;
             List<EmployeeDTO> ShiftEmployees = new List<EmployeeDTO>();
 
             List<bool> GetAvailability = new List<bool>();
@@ -46,17 +49,31 @@ namespace VollopRooster.Repository
                 List<EmployeeDTO> qualifiedEmployeesBar = GetQualifiedShiftRole(Role.Bar);
 
                 GetAvailability = Available(qualifiedEmployeesBar, shift);
-                foreach (var availability in GetAvailability)
+                for (int i = GetAvailability.Count - 1; i >= 0; i--)
                 {
-                    if (availability.Equals(false))
+                    if (GetAvailability[i].Equals(false))
                     {
-                        qualifiedEmployeesBar.RemoveAt(GetAvailability.IndexOf(availability));
+                        qualifiedEmployeesBar.Remove(qualifiedEmployeesBar[i]);
+                        GetAvailability.Remove(GetAvailability[i]);
                     }
                 }
 
                 if (qualifiedEmployeesBar.Count != 0)
                 {
-                    ShiftEmployees.Add(PickEmployee(qualifiedEmployeesBar));
+                    //make sure the whole shift is filled
+                    foreach (var employee in PickEmployee(qualifiedEmployeesBar,shift))
+                    {
+                        ShiftEmployees.Add(employee);
+                    }
+                    int index = 0;
+                    index = qualifiedEmployeesBar.IndexOf(PickEmployee(qualifiedEmployeesBar));
+
+                    var NewemployeeData = qualifiedEmployeesBar[index];
+                    allEmployees.Remove(NewemployeeData);
+                    ShiftEmployees[index] = NewemployeeData;
+
+                    NewemployeeData.MaxHours -= DecreaseMaxHours(shift);
+                    qualifiedEmployeesBar.RemoveAt(index);
                 }
 
                 GetAvailability.Clear();
@@ -67,19 +84,30 @@ namespace VollopRooster.Repository
                 List<EmployeeDTO> qualifiedEmployeesEvent = GetQualifiedShiftRole(Role.Event);
                 GetAvailability = Available(qualifiedEmployeesEvent, shift);
 
-                foreach (var availability in GetAvailability)
+                for (int i = GetAvailability.Count - 1; i >= 0; i--)
                 {
-                    if (availability.Equals(false))
+                    //availability aanpassen als er een record uit qualified wordt verwijderd
+                    if (GetAvailability[i].Equals(false))
                     {
-                        qualifiedEmployeesEvent.RemoveAt(GetAvailability.IndexOf(availability));
+                        qualifiedEmployeesEvent.Remove(qualifiedEmployeesEvent[i]);
+                        GetAvailability.Remove(GetAvailability[i]);
                     }
                 }
 
                 if (qualifiedEmployeesEvent.Count != 0)
                 {
                     ShiftEmployees.Add(PickEmployee(qualifiedEmployeesEvent));
-                }
 
+                    int index = 0;
+                    index = qualifiedEmployeesEvent.IndexOf(PickEmployee(qualifiedEmployeesEvent));
+
+                    var employee = qualifiedEmployeesEvent[index];
+                    allEmployees.Remove(employee);
+                    ShiftEmployees[index] = employee;
+
+                    employee.MaxHours -= DecreaseMaxHours(shift);
+                    qualifiedEmployeesEvent.RemoveAt(index);
+                }
                 GetAvailability.Clear();
             }
 
@@ -88,29 +116,41 @@ namespace VollopRooster.Repository
                 List<EmployeeDTO> qualifiedEmployeesOther = GetQualifiedShiftRole(Role.Other);
                 GetAvailability = Available(qualifiedEmployeesOther, shift);
 
-                foreach (var availability in GetAvailability)
+                for (int i = GetAvailability.Count - 1; i >= 0; i--)
                 {
-                    if (availability.Equals(false))
+                    //availability aanpassen als er een record uit qualified wordt verwijderd
+                    if (GetAvailability[i].Equals(false))
                     {
-                        qualifiedEmployeesOther.RemoveAt(GetAvailability.IndexOf(availability));
+                        qualifiedEmployeesOther.Remove(qualifiedEmployeesOther[i]);
+                        GetAvailability.Remove(GetAvailability[i]);
                     }
                 }
 
                 if (qualifiedEmployeesOther.Count != 0)
                 {
                     ShiftEmployees.Add(PickEmployee(qualifiedEmployeesOther));
-                }
 
+                    int index = 0;
+                    index = qualifiedEmployeesOther.IndexOf(PickEmployee(qualifiedEmployeesOther));
+
+                    var employee = qualifiedEmployeesOther[index];
+                    allEmployees.Remove(employee);
+                    ShiftEmployees[index] = employee;
+
+                    employee.MaxHours -= DecreaseMaxHours(shift);
+                    qualifiedEmployeesOther.RemoveAt(index);
+                }
                 GetAvailability.Clear();
             }
 
             return ShiftEmployees;
         }
 
-        private EmployeeDTO PickEmployee(List<EmployeeDTO> employees)
+        private List<EmployeeDTO> PickEmployee(List<EmployeeDTO> employees,ShiftDTO shift)
         {
-            EmployeeDTO pickemployee = new EmployeeDTO();
+            List<EmployeeDTO> pickemployee = new List<EmployeeDTO>();
             List<double> factor = new List<double>();
+            bool IsFilled = false;
             foreach (var employee in employees)
             {
                 factor.Add(CalculateFactorA(employee));
@@ -122,8 +162,25 @@ namespace VollopRooster.Repository
             {
                 if (CalculateFactorA(employee) == orderedfactor.FirstOrDefault())
                 {
-                    pickemployee = employee;
+                    pickemployee.Add(employee);
                 }
+            }
+
+            ////check if shift is filled
+            //TimeSpan ShiftStart = shift.StartTime;
+            //TimeSpan ShiftEnd = shift.EndTime;
+            //foreach (var employee in pickemployee)
+            //{
+            // //   
+            //}
+
+            if (IsFilled == false)
+            {
+                foreach (var employee in pickemployee)
+                {
+                    employees.Remove(employee);
+                }           
+                PickEmployee(employees, shift);
             }
 
             return pickemployee;
@@ -171,9 +228,7 @@ namespace VollopRooster.Repository
         private double CalculateFactorA(EmployeeDTO employee)
         {
             double factora = 0;
-            //200 = totaal uren beschikbaarheid
-            //employee.Maxhours moet worden verminderd na het inplannen
-            factora = EmployeeData.Count / 200 * employee.MaxHours;
+            factora = EmployeeData.Count / TotalHours * employee.MaxHours;
             return factora;
         }
 
@@ -300,6 +355,13 @@ namespace VollopRooster.Repository
             }
 
             return qualified;
+        }
+
+        private int DecreaseMaxHours(ShiftDTO shift)
+        {
+            int hours = 0;
+            int NrOfHours = shift.EndTime.Hours - shift.StartTime.Hours;
+            return hours;
         }
     }
 }

@@ -103,5 +103,22 @@ namespace VollopRooster.Controllers
             };
             return RedirectToAction("ChangeShift", vm);
         }
+
+        public IActionResult AddShift(DateTime date, TimeSpan starttime, TimeSpan endtime, string description, int nrofbar, int nrofevent, int nrofother)
+        {
+            var model = new ShiftModel
+            {
+                Date = date,
+                StartTime = starttime,
+                EndTime = endtime,
+                Description = description,
+                NrOfBar = nrofbar,
+                NrOfEvent = nrofevent,
+                NrOfExtra = nrofother
+            };
+
+            logic.AddShift(model);
+            return RedirectToAction("ShiftHome");
+        }
     }
 }

@@ -57,6 +57,7 @@ namespace VollopRooster.Repository
                     workSheet.Cells[recordIndex, 4].Value = shift.EndTime.ToString();
                     recordIndex++;
                 }
+                recordIndex++;
             }
 
             workSheet.Column(1).AutoFit();

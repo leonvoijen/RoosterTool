@@ -38,10 +38,15 @@ namespace VollopRooster.Repository
             return _shiftContext.GetAllShiftsFromPeriod(startdate, enddate).ToList();
         }
 
+        public int TotalHours()
+        {
+            return _employeeContext.GetTotalAvailabeHours();
+        }
+
         public void CreateSchedule(DateTime startdate, DateTime enddate)
         {
            Schedule schedule = new Schedule();
-           ScheduleCreator creator = new ScheduleCreator(GetAllEmployeeData(),GetAllAvailabilityData(),GetAllShiftData(startdate,enddate));
+           ScheduleCreator creator = new ScheduleCreator(GetAllEmployeeData(),GetAllAvailabilityData(),GetAllShiftData(startdate,enddate), TotalHours());
            schedule = creator.GetSchedule();
            FileCreator fileCreator = new FileCreator(schedule);
         }

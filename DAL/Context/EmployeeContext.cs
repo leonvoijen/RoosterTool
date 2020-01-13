@@ -168,11 +168,12 @@ namespace DAL.Context
 
                 var reader = command.ExecuteReader();
 
+
                 while (reader.Read())
                 {
-                    hours = (int)reader["TotalHours"];
+                    hours = (int) reader["Totalhours"];
                 }
-            }
+        }
 
             return hours;
         }

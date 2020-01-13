@@ -8,7 +8,7 @@
     <h1>@Model.Name</h1>
     <h5>Maximum hours: @Model.MaxHours </h5>
     <h5>Availability</h5>
-    <p>@Model.Availability</p>
+    @Html.ActionLink("Add Availability", "AddAvailability", "Employee", new {id = @Model.Id}, new {@class = "nav-item nav-link"})
     <h5>Phone Number</h5>
     <p>@Model.Phonenumber</p>
     <h5>competentie</h5>

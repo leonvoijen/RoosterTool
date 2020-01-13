@@ -37,6 +37,17 @@ namespace VollopRooster.Models
         {
         }
 
+        public ShiftModel(TimeSpan startTime, TimeSpan endTime, DateTime date, string description, int nrOfBar, int nrOfEvent, int nrOfExtra)
+        {
+            StartTime = startTime;
+            EndTime = endTime;
+            Date = date;
+            Description = description;
+            NrOfBar = nrOfBar;
+            NrOfEvent = nrOfEvent;
+            NrOfExtra = nrOfExtra;
+        }
+
         public int Id { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }

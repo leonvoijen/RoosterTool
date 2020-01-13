@@ -1,7 +1,39 @@
 ﻿
+@model ShiftModel
 @{
     ViewData["Title"] = "AddShift";
 }
 
-<h1>AddShift</h1>
+<h1>AddEmployee</h1>
+
+<div class="text-center">
+
+    <form asp-controller="Shift" asp-action="AddShift" method="post">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Date</label>
+            <input asp-for="Date" type="datetime" class="form-control" name="date" placeholder="Date">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">starttime</label>
+            <input asp-for="StartTime" type="time" class="form-control" name="starttime" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Availability</label>
+            <input asp-for="EndTime" type="time" class="form-control" name="endtime" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Description</label>
+            <input asp-for="Description" type="Text" class="form-control" name="description" placeholder="description">
+        </div>
+        <h5>Roles</h5>
+        <label>Number of Bar Employees</label>
+        <input asp-for="NrOfBar" type="number" min="0" max="10" step="1" class="form-control" name="nrofbar" />
+        <label>Number of Event Employees</label>
+        <input asp-for="NrOfEvent" type="number" min="0" max="10" step="1" class="form-control" name="nrofevent" />
+        <label>Number of Other Employees</label>
+        <input asp-for="NrOfExtra" type="number" min="0" max="10" step="1" class="form-control" name="nrofother" />
+
+        <button class="btn btn-primary" id="button">Save</button>
+    </form>
+</div>
 

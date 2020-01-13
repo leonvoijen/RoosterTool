@@ -23,7 +23,7 @@ namespace VollopRooster.Controllers
 
         public IActionResult CreateSchedule(DateTime startdate, DateTime enddate)
         {
-            startdate = DateTime.Now;
+            startdate = new DateTime(2019,1,1);
             enddate = DateTime.MaxValue;
             _scheduleLogic.CreateSchedule(startdate, enddate);
             return RedirectToAction("ScheduleHome");

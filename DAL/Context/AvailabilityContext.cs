@@ -68,7 +68,7 @@ namespace DAL.Context
 
                 while (reader.Read())
                 {
-                    availability.UserId = (int) reader["UserId"];
+                    availability.UserId = (int) reader["EmployeeUserId"];
                     availability.StartMonday = (TimeSpan) reader["MondayStart"];
                     availability.StartTuesday = (TimeSpan) reader["TuesdayStart"];
                     availability.StartWednesday = (TimeSpan) reader["WednesdayStart"];
